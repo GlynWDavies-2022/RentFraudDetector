@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RentFraudDetector.Data;
 using RentFraudDetector.Job.Services.Contracts;
 using RentFraudDetector.Job.Services.Implementations;
 using Serilog;
@@ -46,6 +48,11 @@ public class Program
     
     private static void ConfigureServices(HostBuilderContext hostBuilderContext, IServiceCollection services)
     {
+        services.AddDbContext<RentFraudDetectorDbContext>(options =>
+            options.
+                UseSqlServer(
+                    hostBuilderContext.Configuration.GetConnectionString("Server=localhost;Database=RentFraudDetector;Trusted_Connection=True;TrustServerCertificate=true")));
+        
         services.AddSingleton<IApplicationService,ApplicationService>();
 
         services.BuildServiceProvider();
