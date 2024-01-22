@@ -2,8 +2,8 @@
 
 namespace RentFraudDetector.Shared.Models;
 
-public class Company : BaseModel
+public class BaseModel
 {
-    [MaxLength(50)]
-    public string? Name { get; init; }
+    [Key]
+    public int Id { get; init; }
 }
