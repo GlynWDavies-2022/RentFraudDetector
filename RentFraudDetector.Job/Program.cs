@@ -18,7 +18,7 @@ public class Program
         
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
-            .WriteTo.File($"{configuration["Directories:Logs"]}\\Lettings.Fraud.Job\\Log-.log", rollingInterval: RollingInterval.Day)
+            .WriteTo.File($"{configuration["Directories:Logs"]}\\RentFraudDetector.Job\\Log-.log", rollingInterval: RollingInterval.Day)
             .MinimumLevel.Information()
             .CreateLogger();
         
