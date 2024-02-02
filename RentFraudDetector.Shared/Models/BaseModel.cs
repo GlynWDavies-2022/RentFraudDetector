@@ -2,7 +2,7 @@
 
 namespace RentFraudDetector.Shared.Models;
 
-public class BaseModel
+public abstract class BaseModel
 {
     [Key]
     public int Id { get; init; }

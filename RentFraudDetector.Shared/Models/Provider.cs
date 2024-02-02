@@ -3,9 +3,9 @@ using System.Text;
 
 namespace RentFraudDetector.Shared.Models;
 
-public class Company : BaseModel, IEquatable<Company>
+public class Provider : BaseModel, IEquatable<Provider>
 {
-    public bool Equals(Company? other)
+    public bool Equals(Provider? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -16,7 +16,8 @@ public class Company : BaseModel, IEquatable<Company>
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == this.GetType() && Equals((Company)obj);
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((Provider)obj);
     }
 
     public override int GetHashCode()
@@ -34,5 +35,4 @@ public class Company : BaseModel, IEquatable<Company>
 
     [MaxLength(50)]
     public string? Name { get; init; }
-    public ICollection<Employee>? Employees { get; init; }
 }
