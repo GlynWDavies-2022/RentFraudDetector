@@ -6,4 +6,5 @@ public class Company : BaseModel
 {
     [MaxLength(50)]
     public string? Name { get; init; }
+    
 }
