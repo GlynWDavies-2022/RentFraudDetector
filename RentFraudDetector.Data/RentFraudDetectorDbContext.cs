@@ -39,7 +39,7 @@ public class RentFraudDetectorDbContext : DbContext
             new ExemptionReason
             {
                 Id = 1,
-                Description = "Employee Rental Income"
+                Description = "Employee Landlord Rental Income"
             }
         );
         
@@ -51,22 +51,7 @@ public class RentFraudDetectorDbContext : DbContext
             new Provider
             {
                 Id = 1,
-                Name = "ARC-Colchester"
-            },
-            new Provider
-            {
-                Id = 2,
-                Name = "ARC-Weymouth"
-            },
-            new Provider
-            {
-                Id = 3,
                 Name = "Hamcrest"
-            },
-            new Provider
-            {
-                Id = 4,
-                Name = "LosersWeepers"
             }
         );
     }
