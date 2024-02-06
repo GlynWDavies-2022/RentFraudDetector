@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using RentFraudDetector.Data;
 using RentFraudDetector.Job.Services.Contracts;
 using RentFraudDetector.Job.Services.Implementations;
@@ -17,44 +16,43 @@ public class Program
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", false)
             .Build();
-        
+
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.Console()
-            .WriteTo.File($"{configuration["Directories:Logs"]}\\RentFraudDetector.Job\\Log-.log", rollingInterval: RollingInterval.Day)
-            .MinimumLevel.Information()
+            .ReadFrom.Configuration(configuration)
             .CreateLogger();
-        
-        Log.Logger.Information("Application starting.");
-        
+
         try
         {
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
-                {
-                    ConfigureServices(hostContext, services);
-                })
-                .UseSerilog()
-                .Build()
-                .Services.GetRequiredService<IApplicationService>()
-                .Run();
+            Log.Information("Starting application");
+
+            var services = new ServiceCollection();
+
+            ConfigureServices(services, configuration);
+
+            Log.Information("Stopping application.");
         }
         catch (Exception e)
         {
-            Log.Logger.Error(e.Message, e);
+            Log.Fatal(e, "Application startup failed.");
         }
-
-        Log.Logger.Information("Application shutting down.");
+        finally
+        {
+            Log.CloseAndFlush();
+        }
     }
-    
-    private static void ConfigureServices(HostBuilderContext hostBuilderContext, IServiceCollection services)
+
+    private static void ConfigureServices(ServiceCollection services, IConfigurationRoot configuration)
     {
         services.AddDbContext<RentFraudDetectorDbContext>(options =>
-            options.
-                UseSqlServer(
-                    hostBuilderContext.Configuration.GetConnectionString("Server=localhost;Database=RentFraudDetector;Trusted_Connection=True;TrustServerCertificate=true")));
-        
-        services.AddSingleton<IApplicationService,ApplicationService>();
-
+        {
+            options.UseSqlServer(configuration.GetConnectionString("LettingsFraudConnectionString"));
+        });
+        services.AddSingleton(configuration);
+        services.AddSingleton<IApplicationService, ApplicationService>();
+        services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.AddSerilog();
+        });
         services.BuildServiceProvider();
     }
 }
