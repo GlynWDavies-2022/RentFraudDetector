@@ -62,6 +62,7 @@ public class Program
             loggingBuilder.AddSerilog();
         });
         services.AddSingleton<IDownloadService, SFTPDownloadService>();
+        services.AddSingleton<IFileReaderService, EmployeeFileReaderService>();
         services.BuildServiceProvider();
     }
 }
