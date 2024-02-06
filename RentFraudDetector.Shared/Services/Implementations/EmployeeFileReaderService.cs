@@ -19,6 +19,11 @@ public class EmployeeFileReaderService : IFileReaderService
     {
         var employeeDownloadDirectory = _configuration["Directories:Downloads"];
         
+        if (!Directory.Exists(employeeDownloadDirectory))
+        {
+            throw new DirectoryNotFoundException($"Directory {employeeDownloadDirectory} does not exist.");
+        }
+        
         Log.Information($"Scanning {Path.GetDirectoryName(employeeDownloadDirectory)} for files.");
 
         var employeeFile = Directory.GetFiles(employeeDownloadDirectory).MaxBy(f => f);
