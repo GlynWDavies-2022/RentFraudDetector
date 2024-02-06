@@ -21,9 +21,14 @@ public class SFTPDownloadService : IDownloadService
         var host = _configuration["SFTP:Host"];
         var userName = _configuration["SFTP:UserName"];
         var password = _configuration["SFTP:Password"];
-        var remoteDirectory = $"{_configuration["SFTP:Root"]}/{_configuration["ZelloPay:Downloads"]}";
+        var remoteDirectory = $"{_configuration["SFTP:Root"]}{_configuration["ZelloPay:Downloads"]}";
         var localDirectory = _configuration["Directories:Downloads"];
-        var downloadedFile = $"{localDirectory}\\{_configuration["Files:Employee"]}-{{DateTime.Now:yyyy-MM-dd}}.csv";
+        var downloadedFile = $"{localDirectory}\\{_configuration["Files:Employee"]}-{DateTime.Now:yyyy-MM-dd}.csv";
+
+        if (!Directory.Exists(localDirectory))
+        {
+            CreateLocalDownloadDirectory();
+        }
 
         using var sftp = new SftpClient(host, userName, password);
 
@@ -41,7 +46,7 @@ public class SFTPDownloadService : IDownloadService
 
                 Log.Information($"Downloading {file} from {host}/{remoteDirectory}");
 
-                sftp.DownloadFile($"{remoteDirectory}/file.Name", csvFile);
+                sftp.DownloadFile($"{file.FullName}", csvFile);
 
                 Log.Information($"Downloaded {file} to {downloadedFile}");
 
@@ -62,5 +67,13 @@ public class SFTPDownloadService : IDownloadService
         {
             Log.Error($"An error occurred while downloading: {e.Message}");
         } 
+    }
+
+    public void CreateLocalDownloadDirectory()
+    {
+        if (!Directory.Exists(_configuration["Directories:Downloads"]))
+        {
+            Directory.CreateDirectory("C:\\Temp\\Downloads");
+        }
     }
 }

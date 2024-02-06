@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using RentFraudDetector.Data;
 using RentFraudDetector.Job.Services.Contracts;
 using RentFraudDetector.Job.Services.Implementations;
+using RentFraudDetector.Shared.Services.Contracts;
+using RentFraudDetector.Shared.Services.Implementations;
 using Serilog;
 
 namespace RentFraudDetector.Job;
@@ -29,6 +31,12 @@ public class Program
 
             ConfigureServices(services, configuration);
 
+            using (var serviceProvider = services.BuildServiceProvider())
+            {
+                var applicationService = serviceProvider.GetRequiredService<IApplicationService>();
+                applicationService.Run();
+            }
+
             Log.Information("Stopping application.");
         }
         catch (Exception e)
@@ -41,7 +49,7 @@ public class Program
         }
     }
 
-    private static void ConfigureServices(ServiceCollection services, IConfigurationRoot configuration)
+    private static void ConfigureServices(ServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<RentFraudDetectorDbContext>(options =>
         {
@@ -53,6 +61,7 @@ public class Program
         {
             loggingBuilder.AddSerilog();
         });
+        services.AddSingleton<IDownloadService, SFTPDownloadService>();
         services.BuildServiceProvider();
     }
 }
