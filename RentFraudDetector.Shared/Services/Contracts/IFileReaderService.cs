@@ -1,4 +1,4 @@
-﻿using RentFraudDetector.Shared.Domain;
+﻿using RentFraudDetector.Shared.Models;
 
 namespace RentFraudDetector.Shared.Services.Contracts;
 

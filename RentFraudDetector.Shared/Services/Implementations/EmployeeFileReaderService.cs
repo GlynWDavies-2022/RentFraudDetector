@@ -2,7 +2,7 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.Extensions.Configuration;
-using RentFraudDetector.Shared.Domain;
+using RentFraudDetector.Shared.Models;
 using RentFraudDetector.Shared.Exceptions;
 using RentFraudDetector.Shared.Mapping;
 using RentFraudDetector.Shared.Services.Contracts;
