@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentFraudDetector.Job", "RentFraudDetector.Job\RentFraudDetector.Job.csproj", "{77A8C596-6F40-4B0C-89CE-1F30BE4A7A96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentFraudDetector.Data", "RentFraudDetector.Data\RentFraudDetector.Data.csproj", "{587762D0-E24D-437A-92FC-1378BBA1774F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentFraudDetector.Shared", "RentFraudDetector.Shared\RentFraudDetector.Shared.csproj", "{8E77A2E0-5092-4974-9E3A-EAF02DD5653B}"
 EndProject
 Global
@@ -16,10 +14,6 @@ Global
 		{77A8C596-6F40-4B0C-89CE-1F30BE4A7A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77A8C596-6F40-4B0C-89CE-1F30BE4A7A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77A8C596-6F40-4B0C-89CE-1F30BE4A7A96}.Release|Any CPU.Build.0 = Release|Any CPU
-		{587762D0-E24D-437A-92FC-1378BBA1774F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{587762D0-E24D-437A-92FC-1378BBA1774F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{587762D0-E24D-437A-92FC-1378BBA1774F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{587762D0-E24D-437A-92FC-1378BBA1774F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E77A2E0-5092-4974-9E3A-EAF02DD5653B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E77A2E0-5092-4974-9E3A-EAF02DD5653B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E77A2E0-5092-4974-9E3A-EAF02DD5653B}.Release|Any CPU.ActiveCfg = Release|Any CPU

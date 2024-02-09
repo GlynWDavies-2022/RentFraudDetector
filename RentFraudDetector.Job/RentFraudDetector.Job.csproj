@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RentFraudDetector.Data\RentFraudDetector.Data.csproj" />
+      <ProjectReference Include="..\RentFraudDetector.Shared\RentFraudDetector.Shared.csproj" />
     </ItemGroup>
 
 </Project>

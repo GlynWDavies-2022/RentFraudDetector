@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace RentFraudDetector.Data.Migrations
+namespace RentFraudDetector.Shared.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration

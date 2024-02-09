@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace RentFraudDetector.Data;
+namespace RentFraudDetector.Shared.Data;
 
 public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<RentFraudDetectorDbContext>
 {

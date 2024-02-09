@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RentFraudDetector.Data;
+using RentFraudDetector.Shared.Data;
 
 #nullable disable
 
-namespace RentFraudDetector.Data.Migrations
+namespace RentFraudDetector.Shared.Migrations
 {
     [DbContext(typeof(RentFraudDetectorDbContext))]
     partial class RentFraudDetectorDbContextModelSnapshot : ModelSnapshot

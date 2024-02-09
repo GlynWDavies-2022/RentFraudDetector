@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RentFraudDetector.Data;
+using RentFraudDetector.Shared.Data;
 using RentFraudDetector.Job.Services.Contracts;
 using RentFraudDetector.Job.Services.Implementations;
 using RentFraudDetector.Shared.Services.Contracts;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RentFraudDetector.Shared.Models;
 
-namespace RentFraudDetector.Data;
+namespace RentFraudDetector.Shared.Data;
 
 public class RentFraudDetectorDbContext(DbContextOptions<RentFraudDetectorDbContext> options) : DbContext(options)
 {

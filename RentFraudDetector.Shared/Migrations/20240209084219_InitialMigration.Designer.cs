@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RentFraudDetector.Data;
+using RentFraudDetector.Shared.Data;
 
 #nullable disable
 
-namespace RentFraudDetector.Data.Migrations
+namespace RentFraudDetector.Shared.Migrations
 {
     [DbContext(typeof(RentFraudDetectorDbContext))]
-    [Migration("20240208191719_InitialMigration")]
+    [Migration("20240209084219_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
