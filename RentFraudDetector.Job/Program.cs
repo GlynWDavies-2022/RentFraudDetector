@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RentFraudDetector.Shared.Data;
 using RentFraudDetector.Job.Services.Contracts;
 using RentFraudDetector.Job.Services.Implementations;
+using RentFraudDetector.Shared.Models;
 using RentFraudDetector.Shared.Services.Contracts;
 using RentFraudDetector.Shared.Services.Implementations;
 using Serilog;
@@ -53,7 +54,7 @@ public class Program
     {
         services.AddDbContext<RentFraudDetectorDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("LettingsFraudConnectionString"));
+            options.UseSqlServer(configuration.GetConnectionString("RentFraudDetectorConnectionString"));
         });
         services.AddSingleton(configuration);
         services.AddSingleton<IApplicationService, ApplicationService>();
@@ -62,7 +63,9 @@ public class Program
             loggingBuilder.AddSerilog();
         });
         services.AddSingleton<IDownloadService, SFTPDownloadService>();
+        services.AddSingleton<IEncryptionService<EmployeeDb, Employee>, EncryptionService>();
         services.AddSingleton<IFileReaderService, EmployeeFileReaderService>();
+        services.AddSingleton<IRepository<EmployeeDb>, EmployeeRepository>();
         services.BuildServiceProvider();
     }
 }
