@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using RentFraudDetector.Job.Services.Contracts;
 using RentFraudDetector.Shared.Models;
 using RentFraudDetector.Shared.Services.Contracts;
+using Serilog;
 
 namespace RentFraudDetector.Job.Services.Implementations;
 
@@ -57,6 +58,30 @@ public class ApplicationService : IApplicationService
         // ----------------------------------------------------------------------------------------
 
         var encryptedEmployeesFromDatabase = _employeeRepository.Read();
+        
+        // ----------------------------------------------------------------------------------------
+        // Decrypt Database Employees
+        // ----------------------------------------------------------------------------------------
+
+        var decryptedEmployeesFromDatabase = _encryptionService.Decrypt(encryptedEmployeesFromDatabase);
+        
+        // ----------------------------------------------------------------------------------------
+        // Compare Database Employees To Downloaded Employees
+        // ----------------------------------------------------------------------------------------
+
+        var newEmployeesDecrypted = decryptedEmployeesFromDownload.Except(decryptedEmployeesFromDatabase);
+
+        // ----------------------------------------------------------------------------------------
+        // Encrypt New Employees
+        // ----------------------------------------------------------------------------------------
+
+        var newEmployeesEncrypted = _encryptionService.Encrypt(newEmployeesDecrypted,Key,Vector);
+        
+        // ----------------------------------------------------------------------------------------
+        // Write New Employees
+        // ----------------------------------------------------------------------------------------
+        
+        _employeeRepository.Write(newEmployeesEncrypted);
     }
 
     private void DeleteEmployeeFiles()

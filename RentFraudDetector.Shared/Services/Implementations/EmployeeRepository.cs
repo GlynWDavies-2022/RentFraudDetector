@@ -19,4 +19,11 @@ public class EmployeeRepository : IRepository<EmployeeDb>
         
         return employees;
     }
+
+    public void Write(IEnumerable<EmployeeDb> newEmployeesEncrypted)
+    {
+        _context.AddRange(newEmployeesEncrypted);
+        
+        _context.SaveChanges();
+    }
 }

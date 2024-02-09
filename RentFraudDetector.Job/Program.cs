@@ -63,7 +63,7 @@ public class Program
             loggingBuilder.AddSerilog();
         });
         services.AddSingleton<IDownloadService, SFTPDownloadService>();
-        services.AddSingleton<IEncryptionService<EmployeeDb, Employee>, EncryptionService>();
+        services.AddSingleton<IEncryptionService<EmployeeDb, Employee>, EmployeeEncryptionService>();
         services.AddSingleton<IFileReaderService, EmployeeFileReaderService>();
         services.AddSingleton<IRepository<EmployeeDb>, EmployeeRepository>();
         services.BuildServiceProvider();

@@ -116,7 +116,7 @@ public class EmployeeEncryptionService : IEncryptionService<EmployeeDb,Employee>
 
         string? plainText = null;
 
-        using Aes aes = Aes.Create();
+        using var aes = Aes.Create();
         aes.Key = key;
         aes.IV = iv;
         var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
