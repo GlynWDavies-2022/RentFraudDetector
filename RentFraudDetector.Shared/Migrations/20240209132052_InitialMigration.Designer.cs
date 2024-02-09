@@ -11,7 +11,7 @@ using RentFraudDetector.Shared.Data;
 namespace RentFraudDetector.Shared.Migrations
 {
     [DbContext(typeof(RentFraudDetectorDbContext))]
-    [Migration("20240209084219_InitialMigration")]
+    [Migration("20240209132052_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -61,57 +61,42 @@ namespace RentFraudDetector.Shared.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AccountName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<byte[]>("AccountName")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("AccountNumber")
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                    b.Property<byte[]>("AccountNumber")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("BranchName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<byte[]>("BranchName")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("CompanyDbId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FirstName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<byte[]>("FirstName")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("RollNumber")
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                    b.Property<byte[]>("Key")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("SortCode")
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                    b.Property<byte[]>("RollNumber")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("StaffNumber")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<byte[]>("SortCode")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Surname")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<byte[]>("StaffNumber")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Surname")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Vector")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyDbId");
-
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("RentFraudDetector.Shared.Models.EmployeeDb", b =>
-                {
-                    b.HasOne("RentFraudDetector.Shared.Models.CompanyDb", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyDbId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

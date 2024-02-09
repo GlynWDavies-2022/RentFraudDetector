@@ -32,24 +32,20 @@ namespace RentFraudDetector.Shared.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CompanyDbId = table.Column<int>(type: "int", nullable: false),
-                    StaffNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    SortCode = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
-                    BranchName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    AccountNumber = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
-                    AccountName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    RollNumber = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: true)
+                    StaffNumber = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    FirstName = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Surname = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    SortCode = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    BranchName = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    AccountNumber = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    AccountName = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    RollNumber = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Key = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Vector = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Employees_Companies_CompanyDbId",
-                        column: x => x.CompanyDbId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -60,21 +56,16 @@ namespace RentFraudDetector.Shared.Migrations
                     { 1, "Conway" },
                     { 2, "Countryside" }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_CompanyDbId",
-                table: "Employees",
-                column: "CompanyDbId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Companies");
 
             migrationBuilder.DropTable(
-                name: "Companies");
+                name: "Employees");
         }
     }
 }
