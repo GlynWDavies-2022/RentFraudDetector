@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using RentFraudDetector.Job.Services.Contracts;
 using RentFraudDetector.Shared.Models;
 using RentFraudDetector.Shared.Services.Contracts;
-using Serilog;
 
 namespace RentFraudDetector.Job.Services.Implementations;
 
